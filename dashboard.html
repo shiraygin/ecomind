@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMind Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    /* Sidebar gradient matching website */
+    aside { background: linear-gradient(to bottom, #16a34a, #0f172a); }
+    aside button, aside h1 { color: #f0fdf4; }
+    aside button { transition: all 0.3s; }
+    aside button:hover { background: rgba(255,255,255,0.1); }
+    main { background-color: #f0fdf4; }
+    .card { transition: transform 0.3s, box-shadow 0.3s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(22,163,74,0.2); }
+  </style>
+</head>
+<body class="flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 h-screen p-6 flex flex-col">
+    <h1 class="text-2xl font-bold mb-8 flex items-center gap-2">
+      <img src="logo-removebg-preview.png" alt="Logo" class="w-10 h-10 object-contain"> EcoMind
+    </h1>
+    <nav class="flex-1 space-y-4">
+      <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition">
+        <i class="fas fa-tachometer-alt w-5"></i> Dashboard
+      </a>
+      <a href="dashboard2.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition">
+        <i class="fas fa-eye w-5"></i> Graphics
+      </a>
+      <a href="homepage.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition">
+        <i class="fas fa-robot w-5"></i> HOME
+      </a>
+      <a href="map.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition">
+        <i class="fas fa-coins w-5"></i> Map
+      </a>
+    </nav>
+    <footer class="text-sm text-gray-200 mt-6">
+      © 2025 EcoMind
+    </footer>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-green-700">Dashboard</h2>
+      <button id="modeToggle" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">
+        Switch to Off-grid
+      </button>
+    </header>
+
+    <!-- Grid of cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- System Status -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2 flex items-center">
+          System Status <span id="statusLight" class="ml-2 w-3 h-3 rounded-full bg-green-500"></span>
+        </h3>
+        <p><strong>Connection:</strong> Connected ✅</p>
+        <p><strong>Network:</strong> <span id="statusValue" class="font-semibold text-green-800">On-grid</span></p>
+        <p><strong>Last Update:</strong> 2025-09-15 14:30</p>
+        <div id="alertBox" class="hidden mt-3 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+          ⚠️ Unexpected fluctuation detected.
+        </div>
+      </div>
+
+      <!-- Energy Production -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Renewable Energy Production</h3>
+        <p id="energyValue" class="text-3xl font-bold text-green-600">1500 kWh</p>
+        <p class="text-sm text-gray-500">Current production</p>
+        <div class="mt-3 h-32 flex items-center justify-center bg-gray-100 rounded-lg text-gray-400 italic">
+          Energy production chart (24h)
+        </div>
+      </div>
+
+      <!-- Weather Data -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Weather Data</h3>
+        <p><strong>Temperature:</strong> 35°C</p>
+        <p><strong>Wind Speed:</strong> 12 km/h</p>
+        <p><strong>Sky:</strong> Sunny ☀️</p>
+        <div class="mt-3 h-32 flex items-center justify-center bg-gray-100 rounded-lg text-gray-400 italic">
+          Weather forecast chart
+        </div>
+      </div>
+
+      <!-- System Forecast -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">System Forecast</h3>
+        <p><strong>Production:</strong> Slight increase expected in 2 hours</p>
+        <p><strong>Fluctuation:</strong> Low (5%)</p>
+        <div class="mt-3 h-32 flex items-center justify-center bg-gray-100 rounded-lg text-gray-400 italic">
+          Forecast chart
+        </div>
+      </div>
+
+      <!-- Hydrogen Storage -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Hydrogen Production & Storage</h3>
+        <p id="hydrogenValue" class="text-3xl font-bold text-green-600">250 Liters</p>
+        <p class="text-sm text-gray-500">Stored hydrogen volume</p>
+        <div class="mt-3 h-32 flex items-center justify-center bg-gray-100 rounded-lg text-gray-400 italic">
+          Hydrogen production chart
+        </div>
+      </div>
+
+      <!-- Energy Management -->
+      <div class="card bg-white shadow-lg rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Energy Management</h3>
+        <p><strong>To Grid:</strong> 1200 kWh</p>
+        <p><strong>To Hydrogen:</strong> 300 kWh</p>
+        <div class="mt-3 h-32 flex items-center justify-center bg-gray-100 rounded-lg text-gray-400 italic">
+          Energy distribution chart
+        </div>
+        <button class="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+          Activate Manual Mode
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let isOnGrid = true;
+    document.getElementById('modeToggle').addEventListener('click', () => {
+      isOnGrid = !isOnGrid;
+      document.getElementById('statusValue').textContent = isOnGrid ? "On-grid" : "Off-grid";
+      document.getElementById('modeToggle').textContent = `Switch to ${isOnGrid ? "Off-grid" : "On-grid"}`;
+    });
+
+    function updateValues() {
+      document.getElementById('energyValue').textContent = `${Math.floor(Math.random()*200)+1300} kWh`;
+      document.getElementById('hydrogenValue').textContent = `${Math.floor(Math.random()*200)+200} Liters`;
+      const showAlert = Math.random() < 0.1;
+      document.getElementById('alertBox').classList.toggle('hidden', !showAlert);
+      document.getElementById('statusLight').className = `ml-2 w-3 h-3 rounded-full ${showAlert ? "bg-red-500" : "bg-green-500"}`;
+    }
+    setInterval(updateValues, 3000);
+  </script>
+</body>
+</html>

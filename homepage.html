@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoMind - Smart Green Hydrogen AI System</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== Base Styles ===== */
+* { box-sizing: border-box; margin:0; padding:0; }
+html, body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0fdf4;
+    color: #1f2937;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* ===== Header ===== */
+#mainHeader {
+    position: fixed;
+    top:0; left:0; width:100%;
+    height: 70px;
+    background: linear-gradient(90deg, #16a34a, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#mainHeader .header-container {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#mainHeader .logo {
+    display: flex;
+    align-items: center;
+}
+#mainHeader .logo img { height: 50px; } /* smaller header logo */
+#mainHeader .logo h2 { margin-left: 10px; font-size: 1.6em; color: #fff; font-weight: 700; }
+#mainHeader nav ul { display: flex; gap: 20px; }
+#mainHeader nav a {
+    color: #f0fdf4;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+#mainHeader nav a:hover { background: rgba(255,255,255,0.15); color: #a7f3d0; }
+
+/* ===== Hero Section ===== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 20px 40px;
+    gap: 20px;
+    text-align: center;
+}
+.hero h1 { font-size: 2.8em; font-weight: 700; color: #0f172a; max-width: 800px; }
+.hero .hero-logo { width: 300px; height: 300px; object-fit: contain; animation: bounce 2s infinite alternate; }
+
+/* ===== Info Section ===== */
+.info-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+.info-box {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 260px;
+    box-shadow: 0 6px 18px rgba(22,163,74,0.1);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+    opacity: 0;
+    transform: translateY(50px);
+}
+.info-box.visible { opacity: 1; transform: translateY(0); }
+.info-box i { font-size: 50px; color: #16a34a; margin-bottom: 12px; }
+.info-box h3 { color: #16a34a; margin-bottom: 8px; font-size: 1.2em; }
+.info-box p { font-size: 0.95em; color: #1f2937; }
+
+/* ===== Products Section ===== */
+.products-section { padding: 50px 20px; }
+.products-section h2 { color: #0f172a; font-size: 2em; margin-bottom: 10px; }
+.products-section p { max-width: 700px; margin: 0 auto 20px; color: #1f2937; font-size: 1em; }
+.product-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.product-card {
+    width: 220px;
+    background: #e0fdf4;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(22,163,74,0.1);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(50px);
+}
+.product-card.visible { opacity: 1; transform: translateY(0); }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(22,163,74,0.2); }
+.product-card i { font-size: 70px; color: #16a34a; margin-bottom: 10px; }
+.product-card h3 { color: #16a34a; font-size: 1.15em; margin-bottom: 6px; }
+.product-card p { color: #1f2937; font-size: 0.9em; line-height: 1.3; }
+
+/* ===== About Section ===== */
+.about-container {
+    max-width: 850px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    margin: 50px auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.about-container h1 { font-size: 2.2em; margin-bottom: 15px; color: #0f172a; }
+.about-container p { font-size: 1em; color: #1f2937; margin-bottom: 12px; line-height: 1.6; }
+
+/* ===== Founders Section ===== */
+.founders-section { margin: 50px auto; max-width: 1100px; }
+.founders-section h2 { font-size: 1.8em; margin-bottom: 25px; color: #0f172a; }
+.founders-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.founder-card {
+    width: 180px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+    opacity: 0;
+    transform: translateY(50px);
+}
+.founder-card.visible { opacity: 1; transform: translateY(0); }
+.founder-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(22,163,74,0.2); }
+.founder-card i { font-size: 70px; color: #16a34a; margin-bottom: 8px; }
+.founder-card h3 { font-size: 1.1em; color: #16a34a; margin: 4px 0; }
+
+/* ===== Footer ===== */
+footer { background: linear-gradient(90deg, #16a34a, #0f172a); padding: 20px; color: #ffffff; font-size: 1em; }
+
+/* ===== Animations ===== */
+@keyframes bounce { 0% {transform: translateY(0);} 100% {transform: translateY(-15px);} }
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="mainHeader">
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo-removebg-preview.png" alt="EcoMind Header Logo">
+            <h2>EcoMind</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="dashboard.html">start here</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <h1>WELCOME TO <strong>EcoMind</strong></h1>
+    <img src="logo-removebg-preview.png" alt="EcoMind Page Logo" class="hero-logo">
+</section>
+
+<!-- Info Section -->
+<section class="info-section">
+    <div class="info-box"><i class="fas fa-bolt"></i><h3>Smart Monitoring</h3><p>Track renewable energy generation in real-time with advanced AI insights.</p></div>
+    <div class="info-box"><i class="fas fa-droplet"></i><h3>Hydrogen Storage</h3><p>Efficient surplus management by converting excess energy into green hydrogen.</p></div>
+    <div class="info-box"><i class="fas fa-brain"></i><h3>AI Forecast</h3><p>Predict surplus, fluctuations, and energy needs to optimize system reliability.</p></div>
+</section>
+
+<!-- Products Section -->
+<section class="products-section">
+    <h2>Our Core Solutions</h2>
+    <p>EcoMind ensures stable, sustainable, and intelligent energy systems.</p>
+    <div class="product-list">
+        <a href="Dashboard.html" class="product-card"><i class="fas fa-tachometer-alt"></i><h3>Interactive Dashboard</h3><p>Clear visualization of system health, energy flow, and AI recommendations.</p></a>
+        <div class="product-card"><i class="fas fa-network-wired"></i><h3>Grid Management</h3><p>Seamless integration with grid or off-grid systems for energy flexibility.</p></div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-container">
+    <h1>About EcoMind</h1>
+    <p><strong>EcoMind</strong> is a smart Green Hydrogen AI system that combines renewable energy monitoring, hydrogen production, and predictive analytics.</p>
+    <p>Our system prevents dangerous fluctuations, reduces curtailment, and ensures reliable power delivery by storing excess energy as hydrogen fuel.</p>
+    <p>We aim to revolutionize clean energy with sustainable, intelligent, and future-ready solutions.</p>
+</section>
+
+<!-- Founders Section -->
+<section class="founders-section">
+    <h2>Meet Our Team</h2>
+    <div class="founders-container">
+        <div class="founder-card"><i class="fas fa-user"></i><h3>Zainab Alkhater</h3></div>
+        <div class="founder-card"><i class="fas fa-user"></i><h3>Shahad Alhasawai</h3></div>
+        <div class="founder-card"><i class="fas fa-user"></i><h3>Maisa Al Zahrani</h3></div>
+        <div class="founder-card"><i class="fas fa-user"></i><h3>Jinan Al Mousa</h3></div>
+        <div class="founder-card"><i class="fas fa-user"></i><h3>Yaqeen Al Nasif</h3></div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 EcoMind. Powering a sustainable future ⚡</p>
+</footer>
+
+<script>
+// Scroll reveal for cards
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.info-box, .product-card, .founder-card');
+    const windowBottom = window.innerHeight + window.scrollY - 100;
+    elements.forEach(el => {
+        const elementTop = el.offsetTop;
+        if (elementTop < windowBottom) {
+            el.classList.add('visible');
+        }
+    });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
